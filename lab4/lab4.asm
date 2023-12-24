@@ -14,14 +14,12 @@ section .text
     global _start
 
 _start:
-    ; Print prompt
     mov eax, 4
     mov ebx, 1
     mov ecx, prompt
     mov edx, len_prompt
     int 0x80
 
-    ; Read input number
     mov eax, 3
     mov ebx, 0
     mov ecx, n
