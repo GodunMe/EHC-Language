@@ -5,6 +5,7 @@ section .data
     len_output1 equ $ - output1
     output2 db " sequences is: "
     len_output2 equ $ - output2
+    newline db 0xa, 0xd, 0
     
 section .bss
     n resd 1
@@ -63,6 +64,12 @@ sum_loop:
     mov ebx, 1
     mov ecx, sum    
     mov edx, 4      
+    int 0x80
+
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, newline
+    mov edx, 1
     int 0x80
 
     mov eax, 1
