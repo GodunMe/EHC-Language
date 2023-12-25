@@ -9,7 +9,7 @@ section .data
 section .bss
     n resd 1
     sum resd 1
-
+    
 section .text
     global _start
 
@@ -48,14 +48,17 @@ _start:
     mov edx, len_output2
     int 0x80
     
+    sub dword [n], '0'
+    mov dword [sum], 0
     mov ecx, 1  
 
 sum_loop:
-    add sum, ecx  
+    add [sum], ecx  
     inc ecx         
-    cmp ecx, n      
+    cmp ecx, [n]      
     jbe sum_loop    
     
+    add byte [sum], '0'
     mov eax, 4
     mov ebx, 1
     mov ecx, sum    
