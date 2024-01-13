@@ -47,6 +47,8 @@ convert_loop:
     sub al, 32  ; Chuyển chữ thường thành chữ hoa
     mov [ecx + edx], al
     mov byte [is_changed], 1
+    inc edx
+    jmp convert_loop
 
 skip_convert:
     inc edx
