@@ -1,9 +1,9 @@
 section .data
-    prompt db "Input anything here: ", 0
-    len_prompt equ $ - prompt
+    input db "Input anything here: ", 0
+    len_input equ $ - input
     output_msg db "Your string entered: ", 0
     len_output_msg equ $ - output_msg
-    newline db 10  ; ký tự xuống dòng
+    newline db 0xa, 0xd, 0
     not_contain_lower db "Your strings entered is not contain lower case.", 0
     len_not_contain equ $ - not_contain_lower
 
@@ -18,8 +18,8 @@ _start:
     ; In ra thông báo để nhập chuỗi
     mov eax, 4
     mov ebx, 1
-    mov ecx, prompt
-    mov edx, len_prompt
+    mov ecx, input
+    mov edx, len_input
     int 0x80
 
     ; Đọc chuỗi từ người dùng
