@@ -44,7 +44,7 @@ convert_loop:
     cmp al, 'z'
     jg skip_convert
     
-    sub al, 32  ; Chuyển chữ thường thành chữ hoa
+    sub al, 32 
     mov [ecx + edx], al
     mov byte [is_changed], 1
     inc edx
@@ -62,7 +62,7 @@ end_convert:
     mov eax, 4
     mov ebx, 1
     mov ecx, not_contain_lower
-    mov edx, len_not_contain  ; Độ dài của thông báo
+    mov edx, len_not_contain 
     int 0x80
     jmp end_program
 
@@ -81,7 +81,6 @@ strings_not_equal:
     mov edx, 32
     int 0x80
 
-    ; Xuống dòng
     mov eax, 4
     mov ebx, 1
     mov ecx, newline
