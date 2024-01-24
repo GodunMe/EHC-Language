@@ -77,6 +77,7 @@ _start:
       mov   ecx, esi       ; num of digits
 
    call check_input
+   xor al,al
 
 add_loop:  
    mov 	al, [num1 + esi - 1]
