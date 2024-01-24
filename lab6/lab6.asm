@@ -99,7 +99,7 @@ add_loop:
    int	80h                 
 
    mov	edx, 32            
-   mov	ecx, sum-1         
+   mov	ecx, sum        
    mov	ebx, 1         
    mov	eax, 4      
    int	80h                 
