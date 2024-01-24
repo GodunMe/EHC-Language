@@ -6,6 +6,8 @@ section	.data
    input2 db 'Enter the second number: ', 0
    len_input2 equ $ - input2
    newline db 0xa, 0xd, 0
+   error_msg db 'Please enter a valid positive integer', 0xa, 0xd, 0
+   len_error equ $ - error_msg
    
 section .bss
    num1 resb 31
@@ -28,7 +30,9 @@ _start:
    mov ecx, num1
    mov edx, 31
    int 80h
-   
+
+  
+
    ; input the second number
    mov eax, 4
    mov ebx, 1
@@ -41,6 +45,7 @@ _start:
    mov ecx, num2
    mov edx, 31
    int 80h
+
 
    ; find length of two input
    xor ecx, ecx
@@ -71,6 +76,7 @@ _start:
    lenMax:
       mov   ecx, esi       ; num of digits
 
+   call check_input
 
 add_loop:  
    mov 	al, [num1 + esi - 1]
@@ -93,7 +99,7 @@ add_loop:
    int	80h                 
 
    mov	edx, 32            
-   mov	ecx, sum            
+   mov	ecx, sum-1         
    mov	ebx, 1         
    mov	eax, 4      
    int	80h                 
@@ -106,5 +112,27 @@ add_loop:
 
    ; exit the program
    mov	eax, 1        
-   int	80h                 
+   int	80h 
 
+check_input:
+   mov eax, esi
+   mov ebx, edi
+   mov al, [num1 + eax - 1]
+   cmp al, '0'
+   jl input_error
+   cmp al, '9'
+   jg input_error
+
+   mov al, [num2 + ebx - 1]
+   cmp al, '0'
+   jl input_error
+   cmp al, '9'
+   jg input_error
+   ret
+input_error:
+   mov eax, 4
+   mov ebx, 1
+   mov ecx, error_msg
+   mov edx, len_error
+   int 80h
+   jmp _start
