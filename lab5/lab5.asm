@@ -7,8 +7,9 @@ section .data
     not_contain_lower db "Your strings entered is not contain lower case.", 0
     len_not_contain equ $ - not_contain_lower
 
+
 section .bss
-    input_str resb 32
+    input_str resb 33
     is_changed resb 1
 
 section .text
@@ -26,8 +27,9 @@ _start:
     mov eax, 3
     mov ebx, 0
     mov ecx, input_str
-    mov edx, 32
+    mov edx, 33
     int 0x80
+    mov byte [ecx + edx], 0
 
     ; Chuyển đổi chuỗi thành chữ hoa
     mov ecx, input_str
@@ -84,8 +86,9 @@ strings_not_equal:
     mov eax, 4
     mov ebx, 1
     mov ecx, input_str
-    mov edx, 32
+    mov edx, 33
     int 0x80
+
 
 end_program:
     ; Kết thúc chương trình
